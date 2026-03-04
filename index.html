@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakshmi Soujanya Sanka - QA Automation Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d9ff;
+            --primary-dark: #00a8cc;
+            --bg-dark: #0a0e27;
+            --bg-card: #141b3d;
+            --text: #e8eaf6;
+            --text-dim: #a5b4fc;
+            --accent: #7c3aed;
+            --success: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated background grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 217, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 217, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Glow effect */
+        .glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.15), transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .glow:nth-child(1) {
+            top: -200px;
+            right: -200px;
+        }
+
+        .glow:nth-child(2) {
+            bottom: -200px;
+            left: -200px;
+            background: radial-gradient(circle, rgba(0, 217, 255, 0.12), transparent 70%);
+            animation-delay: -4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 30px); }
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 2rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+            animation: fadeIn 1s ease-out 0.2s backwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .status-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--success);
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--bg-dark);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--text-dim);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .section {
+            margin-bottom: 5rem;
+            animation: fadeIn 1s ease-out backwards;
+        }
+
+        .section:nth-child(2) { animation-delay: 0.4s; }
+        .section:nth-child(3) { animation-delay: 0.6s; }
+        .section:nth-child(4) { animation-delay: 0.8s; }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 217, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
+        }
+
+        .skill-category {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .skill-list {
+            color: var(--text);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--bg-dark), 0 0 0 6px var(--primary);
+        }
+
+        .timeline-header {
+            margin-bottom: 1rem;
+        }
+
+        .timeline-role {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-company {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .timeline-date {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+        }
+
+        .timeline-achievements {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .timeline-achievements li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        .timeline-achievements li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        /* Projects */
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 217, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--primary);
+            transform: translateX(10px);
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .project-tech {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Contact Section */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 217, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .contact-label {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-value {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+            word-break: break-word;
+        }
+
+        .contact-value a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-value a:hover {
+            color: var(--primary-dark);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(0, 217, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .timeline {
+                padding-left: 1rem;
+            }
+
+            .timeline-item {
+                padding-left: 1.5rem;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <div class="glow"></div>
+    <div class="glow"></div>
+
+    <header>
+        <nav class="nav">
+            <div class="logo">&lt;LS /&gt;</div>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/lakshmisoujanya" target="_blank">LinkedIn</a>
+                <a href="https://github.com/lakshmisoujanyasouji-oss" target="_blank">GitHub</a>
+                <a href="mailto:lakshmisoujanyasouji@gmail.com">Email</a>
+            </div>
+        </nav>
+
+        <div class="hero">
+            <div class="status-badge">Available for Employment Pass Sponsorship</div>
+            <h1>Lakshmi Soujanya Sanka</h1>
+            <div class="subtitle">Senior QA Automation Engineer | Test Automation Lead</div>
+            <p class="hero-description">
+                8+ years building scalable test automation frameworks for web, REST API, and AWS platforms. 
+                Expert in Playwright, Selenium WebDriver, and WebdriverIO with proven track record of 
+                delivering 40% increase in automation coverage and 45% reduction in regression time.
+            </p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                <a href="#experience" class="btn btn-secondary">View Experience</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Skills Section -->
+        <section class="section" id="skills">
+            <h2 class="section-title">Technical Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-category">// Automation Frameworks</div>
+                    <div class="skill-list">Playwright, Selenium WebDriver (Java), WebdriverIO, Protractor, Page Object Model, Data-Driven Testing</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-category">// Languages</div>
+                    <div class="skill-list">JavaScript (ES6), TypeScript, Java, SQL</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-category">// API & Database</div>
+                    <div class="skill-list">REST API Testing, Postman, JSON/XML Validation, PostgreSQL, MySQL</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-category">// CI/CD & DevOps</div>
+                    <div class="skill-list">Jenkins, GitLab CI/CD, Git, Bitbucket, Build Automation</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-category">// Cloud Testing</div>
+                    <div class="skill-list">AWS (EC2, S3, Lambda, CloudWatch, ASG, CloudFormation, CloudTrail)</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-category">// Tools & Methods</div>
+                    <div class="skill-list">JIRA, Zephyr, HP ALM, Confluence, Agile/Scrum, Risk-Based Testing</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="section" id="experience">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="timeline-role">Test Lead / QA Automation Lead</div>
+                        <div class="timeline-company">HCL Technologies</div>
+                        <div class="timeline-date">Dec 2022 – Sep 2023 | Hyderabad, India</div>
+                    </div>
+                    <ul class="timeline-achievements">
+                        <li>Led 5-member QA automation team; designed Playwright E2E framework from scratch using Page Object Model</li>
+                        <li>Increased automation coverage by 40% within 6 months through strategic framework optimization</li>
+                        <li>Reduced regression execution time by 45% through parallel execution and CI/CD integration</li>
+                        <li>Improved release stability by 30%, significantly reducing production defects</li>
+                        <li>Mentored team members and reduced new hire ramp-up time by 25%</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="timeline-role">Senior QA Automation Engineer</div>
+                        <div class="timeline-company">Cigniti Technologies</div>
+                        <div class="timeline-date">Nov 2021 – Dec 2022 | Hyderabad, India</div>
+                    </div>
+                    <ul class="timeline-achievements">
+                        <li>Delivered WebdriverIO migration POC reducing framework maintenance effort by 25%</li>
+                        <li>Improved test execution efficiency by 35% through suite optimization</li>
+                        <li>Reduced manual regression dependency by 30%</li>
+                        <li>Performed REST API testing and SQL-based database validation</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="timeline-role">Senior QA Automation Engineer</div>
+                        <div class="timeline-company">Experis IT (Client: Cigniti)</div>
+                        <div class="timeline-date">Oct 2020 – Oct 2021 | Hyderabad, India</div>
+                    </div>
+                    <ul class="timeline-achievements">
+                        <li>Developed Playwright and Selenium automation scripts for insurance web applications</li>
+                        <li>Automated policy, claims, and underwriting workflows</li>
+                        <li>Executed comprehensive regression, smoke, and sanity testing</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="timeline-role">Senior QA Engineer – Cloud & SaaS</div>
+                        <div class="timeline-company">Insisiv Labs</div>
+                        <div class="timeline-date">Apr 2019 – Sep 2020 | Bengaluru, India</div>
+                    </div>
+                    <ul class="timeline-achievements">
+                        <li>Tested AWS cost optimization platform validating EC2, S3, Lambda, ASG, and CloudFormation</li>
+                        <li>Cost rules delivered up to 60% AWS cost savings for clients</li>
+                        <li>Performed GUI, REST API, and UAT testing with acceptance criteria</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="section" id="projects">
+            <h2 class="section-title">Key Projects</h2>
+            
+            <div class="project-card">
+                <div class="project-title">Franklin Templeton Contract Hub (Fintech)</div>
+                <div class="project-tech">Playwright • JavaScript • TypeScript • PostgreSQL • CI/CD</div>
+                <p class="project-description">
+                    Built full Playwright E2E automation framework from scratch using Page Object Model. 
+                    Automated database validations improving financial data accuracy across contract workflows. 
+                    Integrated with Jenkins CI/CD pipeline for continuous testing.
+                </p>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">Insisiv Cloud – AWS Cost Optimization Platform</div>
+                <div class="project-tech">AWS • REST API • Postman • PostgreSQL • Angular</div>
+                <p class="project-description">
+                    Validated AWS cost rules for EC2, S3, Lambda, ASG, and CloudFormation delivering 60% cost savings. 
+                    Performed comprehensive REST API and SQL testing for cloud reporting accuracy on SaaS platform.
+                </p>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">Homesite Insurance – CI/CD Automation</div>
+                <div class="project-tech">Selenium • WebdriverIO • Jenkins • Java • JavaScript</div>
+                <p class="project-description">
+                    Built Jenkins CI/CD pipelines for Selenium/WebdriverIO regression testing. 
+                    Automated insurance workflows including policy management and claims processing, 
+                    improving test coverage and release confidence.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="section" id="contact">
+            <h2 class="section-title">Get in Touch</h2>
+            <div class="contact-info">
+                <div class="contact-card">
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value">
+                        <a href="mailto:lakshmisoujanyasouji@gmail.com">lakshmisoujanyasouji@gmail.com</a>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-label">Phone</div>
+                    <div class="contact-value">+65 8831 5752</div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-label">Location</div>
+                    <div class="contact-value">Singapore</div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-label">Work Authorization</div>
+                    <div class="contact-value">Dependant Pass<br><small style="font-size: 0.85rem;">Open to EP/S Pass</small></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Lakshmi Soujanya Sanka. Built with precision and passion for quality.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.85rem;">
+            <strong>Education:</strong> B.Tech – Information Technology, JNTU 2013 | 
+            <strong>Certifications:</strong> Selenium, Java, SQL Essential Training
+        </p>
+    </footer>
+</body>
+</html>
